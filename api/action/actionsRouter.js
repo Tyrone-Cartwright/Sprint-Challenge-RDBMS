@@ -1,10 +1,9 @@
 const express = require("express");
-const helpers = require("../../data/helpers/helperFunction.js");
+const db = require("../../data/helpers/helperFunction.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  helpers
-    .getActions()
+  db.getActions()
     .then(actions => {
       res.status(200).json(actions);
     })
@@ -14,8 +13,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  helpers
-    .addAction(req.body)
+  db.addAction(req.body)
     .then(id => {
       res.status(201).json({ id: id[0], ...req.body });
     })
