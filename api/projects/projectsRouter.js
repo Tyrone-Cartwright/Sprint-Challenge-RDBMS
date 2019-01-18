@@ -1,10 +1,9 @@
 const express = require("express");
-const helpers = require("../../data/helpers/helperFunction.js");
+const db = require("../../data/helpers/helperFunction.js");
 const router = express.Router();
 
 router.get("/:id", (req, res) => {
-  helpers
-    .getProjectById(req.params.id)
+  db.getProjectById(req.params.id)
     .then(project => {
       if (project) {
         res.status(200).json(project);
@@ -20,8 +19,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  helpers
-    .getProjects()
+  db.getProjects()
     .then(projects => {
       res.status(200).json(projects);
     })
@@ -31,8 +29,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  helpers
-    .addProject(req.body)
+  db.addProject(req.body)
     .then(id => {
       res.status(201).json({ id: id[0], ...req.body });
     })
