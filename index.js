@@ -13,4 +13,4 @@ server.use(express.json());
 server.use("/api/projects/", projectsRouter);
 server.use("/api/actions/", actionsRouter);
 
-server.listen(5000, () => console.log("Server running on port 5000"));
+server.listen(5000, () => console.log("Server running on port 5k"));
