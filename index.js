@@ -1,22 +1,16 @@
-const knex = require("knex");
 const express = require("express");
-const knexConfig = require("./knexfile.js");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const cors = require("cors");
+const projectsRouter = require("./api/projects/projectsRouter");
+const actionsRouter = require("./api/action/actionsRouter");
 
 const server = express();
 
 server.use(helmet());
-server.use(express.json());
 server.use(morgan("short"));
-server.use(cors());
+server.use(express.json());
 
-// Connect to database
-const db = knex(knexConfig.development);
+server.use("/api/projects/", projectsRouter);
+server.use("/api/actions/", actionsRouter);
 
-server.get("/", (req, res) => {
-  res.send("API Working");
-});
-
-server.listen(5000, () => console.log("server on 5k"));
+server.listen(5000, () => console.log("Server running on port 5000"));
