@@ -11,11 +11,13 @@ const getProjectById = id => {
   const project = db("projects").where({ id: id });
 
   const actions = db("actions").where({ project_id: id });
-
+  //console.log([project, actions]);
   return Promise.all([project, actions]).then(results => {
+    console.log(results);
     let [project, actions] = results;
+
     if (project.length > 0) {
-      return { ...project[0], actions: actions };
+      return { ...project[0], actions };
     } else {
       return null;
     }
